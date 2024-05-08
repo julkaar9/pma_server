@@ -648,20 +648,20 @@ def get_uid(slideRef, sessionID=None, verify=True):
     Get the UID for a specific slide
     """
     sessionID = _pma_session_id(sessionID)
-    if (sessionID == _pma_pmacoreliteSessionID):
-        if is_lite():
-            raise ValueError(
-                "PMA.core.lite found running, but doesn't support UID generation.For advanced anonymization, please upgrade to PMA.core."
-            )
-        else:
-            raise ValueError(
-                "PMA.core.lite not found, and besides; it doesn't support UID generation. For advanced anonymization, please upgrade to PMA.core."
-            )
-
+    # if (sessionID == _pma_pmacoreliteSessionID):
+    #     if is_lite():
+    #         raise ValueError(
+    #             "PMA.core.lite found running, but doesn't support UID generation.For advanced anonymization, please upgrade to PMA.core."
+    #         )
+    #     else:
+    #         raise ValueError(
+    #             "PMA.core.lite not found, and besides; it doesn't support UID generation. For advanced anonymization, please upgrade to PMA.core."
+    #         )
+    print(pma._pma_q(slideRef))
     url = _pma_api_url(sessionID) + "GetUID?sessionID=" + \
         pma._pma_q(sessionID) + "&path=" + pma._pma_q(slideRef)
-    if pma._pma_debug == True:
-        print(url)
+    #if pma._pma_debug == True:
+    print(url)
     r = requests.get(url, verify=verify)
     json = r.json()
     global _pma_amount_of_data_downloaded
@@ -966,8 +966,8 @@ def get_barcode_text(slideRef, sessionID=None, verify=True):
         slideRef = slideRef[1:]
     url = _pma_api_url(sessionID) + "GetBarcodeText?sessionID=" + \
         pma._pma_q(sessionID) + "&pathOrUid=" + pma._pma_q(slideRef)
-    if pma._pma_debug == True:
-        print(url)
+    #if pma._pma_debug == True:
+    print(url)
     r = requests.get(url, verify=verify)
     if ((not (r.text is None)) and (len(r.text) > 0)):
         json = r.json()
@@ -1476,13 +1476,13 @@ def get_files_for_slide(slideRef, sessionID=None, verify=True):
 
 def search_slides(startDir, pattern, sessionID=None, verify=True):
     sessionID = _pma_session_id(sessionID)
-    if (sessionID == _pma_pmacoreliteSessionID):
-        if is_lite():
-            raise ValueError(
-                "PMA.core.lite found running, but doesn't support searching.")
-        else:
-            raise ValueError(
-                "PMA.core.lite not found, and besides; it doesn't support searching.")
+    # if (sessionID == _pma_pmacoreliteSessionID):
+    #     if is_lite():
+    #         raise ValueError(
+    #             "PMA.core.lite found running, but doesn't support searching.")
+    #     else:
+    #         raise ValueError(
+    #             "PMA.core.lite not found, and besides; it doesn't support searching.")
 
     if (startDir.startswith("/")):
         startDir = startDir[1:]
